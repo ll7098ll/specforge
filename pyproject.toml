@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "specforge"
+version = "0.2.0"
+description = "Autonomous Multi-Agent Python Software Factory with Subprocess Self-Healing, AST Mutation Testing, and Empirical Big-O Profiling"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [
+  { name = "ll7098ll" }
+]
+keywords = ["multi-agent", "self-healing", "mutation-testing", "ast", "profiler", "tui"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+]
+
+[project.scripts]
+specforge = "specforge.cli:main"
+specforge-server = "specforge.server:run_server"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["specforge*"]

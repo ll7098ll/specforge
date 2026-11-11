@@ -1,0 +1,24 @@
+name: SpecForge CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  verify-pipeline:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Run Unit, Self-Healing, AST Mutation & Big-O Profiler Tests
+        run: python3 -m unittest discover -s tests -v
+      - name: Run TUI Pipeline Smoke Check
+        run: python3 -m specforge.cli --mission token_bucket_limiter
